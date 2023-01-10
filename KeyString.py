@@ -1,12 +1,9 @@
-from PyQt5.QtWidgets import QMainWindow,QWidget, QGridLayout, QPushButton, QTextEdit, QApplication, QDesktopWidget,\
-                            QLabel, QFrame
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QTextEdit, QApplication, QLabel, QFrame
 from PyQt5.QtCore import QObject
-from PyQt5.QtCore import Qt,pyqtSignal, QSize
-from PyQt5.QtGui import QFont, QScreen
-import sys
+from PyQt5.QtCore import Qt, pyqtSignal, QSize
+from PyQt5.QtGui import QFont
 from functools import partial
 from Settings import DataWheelsRun, DataWheelsGeo
-
 import LogPrg
 
 
@@ -16,6 +13,7 @@ class MySignals(QObject):
     finished_wheelRun = pyqtSignal(object)
     finished_wheelGeo = pyqtSignal(object)
     cancel_edit = pyqtSignal()
+
 
 style = '''
 QPushButton {
@@ -38,6 +36,8 @@ QPushButton {
         color: #F0E68C;
      }
 '''
+
+
 class KeyS(QWidget):
     """description of class"""
     def __init__(self, win_g):
@@ -351,6 +351,7 @@ class KeyS(QWidget):
     def nextElemetns(self, txt_e):
         try:
             flag_finish = False
+            next_mode = 0
             if self.type_keyb == 'serial':
                 if self.mode_edit == 1:
                     self.new_serial_number = txt_e

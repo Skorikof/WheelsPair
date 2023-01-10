@@ -234,7 +234,7 @@
        <item>
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>3</number>
+          <number>6</number>
          </property>
          <widget class="QWidget" name="msg_page">
           <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -4122,6 +4122,12 @@ QPushButton:pressed
            </property>
            <item>
             <widget class="QFrame" name="debug_run_frame">
+             <property name="maximumSize">
+              <size>
+               <width>420</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="frameShape">
               <enum>QFrame::Box</enum>
              </property>
@@ -4250,42 +4256,17 @@ QPushButton:pressed
                     <property name="verticalSpacing">
                      <number>0</number>
                     </property>
-                    <item row="6" column="0" alignment="Qt::AlignLeft">
-                     <widget class="QPushButton" name="run_debug_start_btn">
-                      <property name="minimumSize">
-                       <size>
-                        <width>200</width>
-                        <height>40</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>200</width>
-                        <height>40</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Arial Black</family>
-                        <pointsize>16</pointsize>
-                       </font>
-                      </property>
-                      <property name="text">
-                       <string>СТАРТ</string>
-                      </property>
-                     </widget>
-                    </item>
                     <item row="0" column="1">
                      <widget class="QLineEdit" name="run_debug_speed_lineEdit">
                       <property name="minimumSize">
                        <size>
-                        <width>0</width>
+                        <width>180</width>
                         <height>40</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>200</width>
+                        <width>180</width>
                         <height>40</height>
                        </size>
                       </property>
@@ -4310,13 +4291,13 @@ QPushButton:pressed
                      <widget class="QLCDNumber" name="run_debug_speed_carrent_lcdNumber">
                       <property name="minimumSize">
                        <size>
-                        <width>0</width>
+                        <width>180</width>
                         <height>70</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>200</width>
+                        <width>180</width>
                         <height>70</height>
                        </size>
                       </property>
@@ -4358,13 +4339,13 @@ QPushButton:pressed
                      <widget class="QPushButton" name="run_debug_stop_btn">
                       <property name="minimumSize">
                        <size>
-                        <width>200</width>
+                        <width>180</width>
                         <height>40</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>200</width>
+                        <width>180</width>
                         <height>40</height>
                        </size>
                       </property>
@@ -4456,13 +4437,13 @@ QPushButton:pressed
                      <widget class="QComboBox" name="run_debug_gear_comboBox">
                       <property name="minimumSize">
                        <size>
-                        <width>250</width>
+                        <width>200</width>
                         <height>0</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>250</width>
+                        <width>200</width>
                         <height>35</height>
                        </size>
                       </property>
@@ -4484,13 +4465,13 @@ QPushButton:pressed
                      <widget class="QComboBox" name="run_debug_direct_comboBox">
                       <property name="minimumSize">
                        <size>
-                        <width>250</width>
+                        <width>200</width>
                         <height>0</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>250</width>
+                        <width>200</width>
                         <height>35</height>
                        </size>
                       </property>
@@ -4499,6 +4480,31 @@ QPushButton:pressed
                         <family>Arial</family>
                         <pointsize>16</pointsize>
                        </font>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="6" column="0">
+                     <widget class="QPushButton" name="run_debug_start_btn">
+                      <property name="minimumSize">
+                       <size>
+                        <width>180</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>180</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Arial Black</family>
+                        <pointsize>16</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>СТАРТ</string>
                       </property>
                      </widget>
                     </item>
@@ -5492,7 +5498,96 @@ border-color: rgb(0, 0, 0);</string>
                   <number>0</number>
                  </property>
                  <item>
+                  <widget class="QFrame" name="frame">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>50</height>
+                    </size>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_21">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QPushButton" name="geometry_debug_start_btn">
+                      <property name="minimumSize">
+                       <size>
+                        <width>200</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>200</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Arial Black</family>
+                        <pointsize>16</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>СТАРТ</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="geometry_debug_stop_btn">
+                      <property name="minimumSize">
+                       <size>
+                        <width>200</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>200</width>
+                        <height>45</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Arial Black</family>
+                        <pointsize>16</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>СТОП</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
                   <widget class="QFrame" name="debug_geometry_graph_frame">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>300</height>
+                    </size>
+                   </property>
                    <property name="frameShape">
                     <enum>QFrame::Box</enum>
                    </property>
@@ -5599,41 +5694,16 @@ border-color: rgb(0, 0, 0);</string>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QPushButton" name="geometry_debug_stop_btn">
+                     <widget class="QPushButton" name="geometry_debug_angle_start_btn">
                       <property name="minimumSize">
                        <size>
-                        <width>0</width>
+                        <width>150</width>
                         <height>40</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>100</width>
-                        <height>40</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Arial Black</family>
-                        <pointsize>16</pointsize>
-                       </font>
-                      </property>
-                      <property name="text">
-                       <string>СТОП</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="geometry_debug_start_btn">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>40</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>100</width>
+                        <width>150</width>
                         <height>40</height>
                        </size>
                       </property>
@@ -5648,6 +5718,31 @@ border-color: rgb(0, 0, 0);</string>
                       </property>
                      </widget>
                     </item>
+                    <item>
+                     <widget class="QPushButton" name="geometry_debug_angle_stop_btn">
+                      <property name="minimumSize">
+                       <size>
+                        <width>150</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>150</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Arial Black</family>
+                        <pointsize>16</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>СТОП</string>
+                      </property>
+                     </widget>
+                    </item>
                    </layout>
                   </widget>
                  </item>
@@ -5656,7 +5751,7 @@ border-color: rgb(0, 0, 0);</string>
                    <property name="maximumSize">
                     <size>
                      <width>16777215</width>
-                     <height>200</height>
+                     <height>190</height>
                     </size>
                    </property>
                    <property name="frameShape">
@@ -5795,7 +5890,7 @@ border-color: rgb(0, 0, 0);</string>
                    <property name="maximumSize">
                     <size>
                      <width>16777215</width>
-                     <height>270</height>
+                     <height>250</height>
                     </size>
                    </property>
                    <property name="frameShape">

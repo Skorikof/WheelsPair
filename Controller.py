@@ -20,8 +20,7 @@ class Controller(object):
 
         self.winConnection()
 
-        self.exchange = PollExchange(1, self.set_port.client, self.window)
-
+        self.exchange = PollExchange(self.set_port.client, self.window)
 
     def winConnection(self):
         try:
@@ -237,12 +236,15 @@ class Controller(object):
 
     def closePrg(self):
         try:
-            self.exchange.signals.signalExit.emit()
+            self.exchange.signals.signal_run_switch_close.emit()
+            self.exchange.signals.signal_geo_switch_close.emit()
+            self.logger.info('Programm is exit')
             self.window.close()
             self.set_port.client.close()
 
         except Exception as e:
             self.logger.error(e)
+
 
 def main():
     logger = LogPrg.get_logger(__name__)
@@ -257,6 +259,7 @@ def main():
 
     except Exception as e:
         logger.error(e)
+
 
 if __name__=='__main__':
     main()

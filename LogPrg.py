@@ -5,7 +5,7 @@ import os
 _log_format = f"%(asctime)s - [%(levelname)s] - %(name)s - (%(filename)s).%(funcName)s(%(lineno)d) - %(message)s"
 _date_log = str(datetime.now().day).zfill(2) + '_' + str(datetime.now().month).zfill(2) + \
             '_' + str(datetime.now().year)
-_path_logs='/System'
+_path_logs = 'log'
 
 def get_warn_handler():
     warn_handler = logging.FileHandler(_path_logs + '/' + _date_log + '.log', encoding='utf-8')

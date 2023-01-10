@@ -1,7 +1,9 @@
+import inspect
+
 import LogPrg
 from datetime import datetime
 from Settings import DataWheelsRun, DataWheelsGeo, PrgProperties
-from Threads import Reader
+from Threads import RunSwitchReader, GeoSwitchReader
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, QThreadPool
 
 
@@ -10,40 +12,68 @@ class PollSignals(QObject):
     get_Delete_Wheels = pyqtSignal()
     get_Prg_Mode = pyqtSignal(str)
     signal_edit_serial = pyqtSignal()
+    signal_run_switch = pyqtSignal()
+    signal_run_switch_close = pyqtSignal()
+    signal_geo_switch = pyqtSignal()
+    signal_geo_switch_close = pyqtSignal()
     signalStartRun = pyqtSignal()
     signalStopRun = pyqtSignal()
     signalStartGeo = pyqtSignal()
     signalStopGeo = pyqtSignal()
-    signalExit = pyqtSignal()
 
 
 class PollExchange(object):
     signals = PollSignals()
 
-    def __init__(self, id, client, win):
+    def __init__(self, client, win):
         super(PollExchange, self).__init__()
+        self.logger = LogPrg.get_logger(__name__)
         self.wheelsRun = DataWheelsRun()
         self.wheelsGeo = DataWheelsGeo()
-        self.id = id
         self.client = client
         self.win = win
 
         self.prg = PrgProperties()
 
-        self.pollEx = QThreadPool()
-        self.pollEx.setMaxThreadCount(5)
-        self.pollEx.clear()
+        self.threadpool = QThreadPool()
 
-        self.reader = Reader(self.id, self.client)
+        self.readSwitch()
 
-        # self.reader.signals.result.connect(self.resultRead)
-        # self.reader.signals.error_read.connect(self.errorRead)
-        #
-        # self.signals.signalStartRun.connect(self.reader.startThread)
-        # self.signals.signalStopRun.connect(self.reader.stopThread)
-        # self.signals.signalExit.connect(self.reader.exitThread)
+    def readSwitch(self):
+        try:
+            self.readerRunSwitch = RunSwitchReader(self.client)
+            self.readerRunSwitch.signals.run_switch.connect(self.readSwitchResult)
+            self.readerRunSwitch.signals.error_read.connect(self.errorRead)
+            self.readerRunSwitch.signals.error_modbus.connect(self.errorModbus)
+            self.signals.signal_run_switch.connect(self.readerRunSwitch.startThread)
+            self.signals.signal_run_switch_close.connect(self.readerRunSwitch.exitThread)
+            self.threadpool.start(self.readerRunSwitch)
+            self.readerRunSwitch.startThread()
 
-        self.logger = LogPrg.get_logger(__name__)
+            self.readerGeoSwitch = GeoSwitchReader(self.client)
+            self.readerGeoSwitch.signals.geo_switch.connect(self.readSwitchResult)
+            self.readerGeoSwitch.signals.error_read.connect(self.errorRead)
+            self.readerGeoSwitch.signals.error_modbus.connect(self.errorModbus)
+            self.signals.signal_geo_switch.connect(self.readerGeoSwitch.startThread)
+            self.signals.signal_geo_switch_close.connect(self.readerGeoSwitch.exitThread)
+            self.threadpool.start(self.readerGeoSwitch)
+            self.readerGeoSwitch.startThread()
+
+        except Exception as e:
+            self.logger.error(e)
+
+    def readSwitchResult(self, mode, data):
+        try:
+            if mode == 'run':
+                self.run_switch = data
+
+            if mode == 'geo':
+                self.geo_swith = data
+
+        except Exception as e:
+            self.logger.error(e)
+
+
 
     def btnTestRun(self):
         try:
@@ -56,12 +86,9 @@ class PollExchange(object):
                 self.win.ui.run_test_save_btn.setEnabled(False)
                 self.fillLineDataRun()
                 self.win.ui.stackedWidget.setCurrentIndex(3)
-                self.signals.signalStartRun.connect(self.reader.startThread)
 
         except Exception as e:
             self.logger.error(e)
-
-
 
     def btnTestGeo(self):
         try:
@@ -135,11 +162,10 @@ class PollExchange(object):
         except Exception as e:
             self.logger.error(e)
 
-    def errorRead(self, str_e):
-        try:
-            print(str_e)
+    def errorRead(self, text):
+            print(text)
 
-        except Exception as e:
-            self.logger.error(e)
+    def errorModbus(self, text):
+        print(text)
 
 

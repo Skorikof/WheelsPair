@@ -1,5 +1,7 @@
 import sys
 import traceback
+
+import GlobalVar
 import LogPrg
 from MainUi import Ui_MainWindow
 from ArchiveRun import RunArchive
@@ -26,6 +28,7 @@ class WindowSignals(QObject):
 
 class ChangeUI(QMainWindow):
     prg = PrgProperties()
+
     def __init__(self):
         super(ChangeUI, self).__init__()
         self.ui = Ui_MainWindow()
@@ -35,10 +38,10 @@ class ChangeUI(QMainWindow):
 
         self.signals = WindowSignals()
 
+        self.logger = LogPrg.get_logger(__name__)
+
         fg = self.frameGeometry()
         self.keyboardS = KeyS(fg)
-
-        self.logger = LogPrg.get_logger(__name__)
 
         self.winConnection()
         self.initStatusBar()
@@ -124,12 +127,13 @@ class ChangeUI(QMainWindow):
         except Exception as e:
             self.logger.error(e)
 
-    def initWheels(self, type):
+    def initWheels(self, mode):
         try:
-            if type == 'run':
+            if mode == 'run':
                 self.prg.type_wheel = 'run'
-            if type == 'geo':
+            if mode == 'geo':
                 self.prg.type_wheel = 'geo'
+
             self.wheels = Wheels(self.prg)
             self.updateWheels()
 
@@ -461,7 +465,6 @@ class ChangeUI(QMainWindow):
 
     def hand_debug_page(self):
         pass
-
 
     def archive_page(self):
         try:

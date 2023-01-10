@@ -72,9 +72,11 @@ class PortSettings(object):
             dim_t = str_p.split(',')
             self.baudrate = int(dim_t[0])
             self.parity = dim_t[1]
-            self.databits = int(dim_t[2])
+            self.databits = dim_t[2]
             self.stopbits = int(dim_t[3])
             self.client = ModbusClient()
+
+            a = self.initPort()
 
         except Exception as e:
             self.logger.error(e)
@@ -87,6 +89,7 @@ class PortSettings(object):
                                        databits=self.databits,
                                        stopbits=self.stopbits,
                                        strict=False)
+
             self.port_connect = self.client.connect()
 
             if self.port_connect:
@@ -168,8 +171,10 @@ class SettingsDev(object):
 
                             except:
                                 pass
+
                 except:
                     pass
+
         except Exception as e:
             print(e)
 
